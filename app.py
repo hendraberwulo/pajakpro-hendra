@@ -7,6 +7,11 @@ from datetime import datetime, date
 from inti.validator import validasi_faktur, validasi_master
 from inti.exporter import generate_coretax_csv
 
+st.set_page_config(page_title="PAJAKPRO BY HENDRA", layout="wide", page_icon="📊")
+
+# DEBUG: Memastikan skrip tereksekusi oleh Streamlit Cloud
+st.write("🔍 DEBUG: Skrip berhasil berjalan sampai sini!")
+
 # === SISTEM LICENSE 3 HARI ===
 TANGGAL_INSTAL = date(2026, 7, 26)  
 MASA_TRIAL = 3  
@@ -20,8 +25,6 @@ def cek_license():
     else:
         sisa = MASA_TRIAL - hari_ke
         st.sidebar.success(f"✅ Trial: Sisa {sisa} hari lagi")
-
-st.set_page_config(page_title="PAJAKPRO BY HENDRA", layout="wide", page_icon="📊")
 
 cek_license() # JALANKAN CEK LICENSE
 
