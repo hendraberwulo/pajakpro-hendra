@@ -3,16 +3,9 @@ import pandas as pd
 import os
 import zipfile
 import json
-import shutil
 from datetime import datetime, date
 from inti.validator import validasi_faktur, validasi_master
 from inti.exporter import generate_coretax_csv
-
-import webbrowser
-import threading
-
-def open_browser():
-    webbrowser.open_new("http://localhost:8502")
 
 # === SISTEM LICENSE 3 HARI ===
 TANGGAL_INSTAL = date(2026, 7, 26)  
@@ -29,10 +22,6 @@ def cek_license():
         st.sidebar.success(f"✅ Trial: Sisa {sisa} hari lagi")
 
 st.set_page_config(page_title="PAJAKPRO BY HENDRA", layout="wide", page_icon="📊")
-
-# JALANKAN BUKA BROWSER 2 DETIK SETELAH START (Hanya jalan di lokal/EXE)
-if not os.environ.get("STREAMLIT_SERVER_RUNNING"):
-    threading.Timer(2, open_browser).start()
 
 cek_license() # JALANKAN CEK LICENSE
 
@@ -202,13 +191,3 @@ elif pilihan == "Backup & Restore":
         with open(backup_name, "rb") as f:
             st.download_button("⬇️ Download File Backup", f, backup_name)
         st.success("✅ Backup Berhasil!")
-
-# ==========================================
-# KODE AMAN: JALANKAN EXE LOKAL ATAU CLOUD
-# ==========================================
-if __name__ == "__main__":
-    if getattr(sys, 'frozen', False):
-        from streamlit.web import cli as stcli
-        import sys
-        sys.argv = ["streamlit", "run", sys.executable, "--global.developmentMode=false"]
-        sys.exit(stcli.main())
