@@ -3,29 +3,13 @@ import pandas as pd
 import os
 import zipfile
 import json
-from datetime import datetime, date
+from datetime import datetime
 
 # Pastikan modul impor lokal ini tersedia di repositori Anda (inti/validator.py & inti/exporter.py)
 from inti.validator import validasi_faktur, validasi_master
 from inti.exporter import generate_coretax_csv
 
 st.set_page_config(page_title="PAJAKPRO BY HENDRA", layout="wide", page_icon="📊")
-
-# === SISTEM LICENSE 3 HARI ===
-TANGGAL_INSTAL = date(2026, 7, 26)  
-MASA_TRIAL = 3  
-
-def cek_license():
-    hari_ke = (date.today() - TANGGAL_INSTAL).days
-    if hari_ke >= MASA_TRIAL:
-        st.error("🚫 MASA TRIAL HABIS")
-        st.warning("Aplikasi PAJAKPRO BY HENDRA trial 3 hari sudah berakhir")
-        st.stop()
-    else:
-        sisa = MASA_TRIAL - hari_ke
-        st.sidebar.success(f"✅ Trial: Sisa {sisa} hari lagi")
-
-cek_license() # JALANKAN CEK LICENSE
 
 # CSS TAMPILAN
 st.markdown("""
@@ -40,6 +24,7 @@ st.markdown("""
 
 st.sidebar.image("https://placehold.co/200x80/0A2E6C/FFD700?text=PAJAKPRO+BY+HENDRA", use_container_width=True)
 st.sidebar.title("MENU UTAMA")
+st.sidebar.success("Status: Demo Cloud - Full Access")
 
 menu = ["Dashboard", "Setting Mapping", "Import Data Accurate", "Validasi Pajak", "Export CoreTax", "Laporan Ringkasan", "Backup & Restore"]
 pilihan = st.sidebar.radio("", menu)
